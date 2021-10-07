@@ -9,9 +9,8 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Agar proses simpel, saya akan mengerjakan problem secara berurutan dari 1-10, dan pada setiap branch problem yang sebelumnya telah dikerjakan dari awal sampai problem dari branch tersebut, jadi akan ada scene dari problem sebelumnya pada setiap branch.
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
-### Notes untuk Problem 1
-- Solusi untuk problem 1 ada di scene Problem1
-- Button hanya merupakan placeholder yang akan diimplementasikan terakhir
+### Notes untuk Problem 2
+- Bola akan di push dalam jeda 3 detik agar saat dicoba di build bola masih terlihat karena ada delay loading
 
 Nama      : Abdurrahman Luqmanul Hakim
 
