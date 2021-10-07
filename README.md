@@ -5,7 +5,7 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 ### Notes
 - Unity Editor yang digunakan dalam pengerjaan adalah versi 2020.3.19f1
 - Setiap solusi problem akan dipisahkan dengan menaruhnya di scene masing-masing
-- Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut.
+- Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
 
 Nama      : Abdurrahman Luqmanul Hakim
