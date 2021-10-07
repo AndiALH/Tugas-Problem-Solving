@@ -10,6 +10,7 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
 ### Notes untuk Problem 1
+- Solusi untuk problem 1 ada di scene Problem1
 - Button hanya merupakan placeholder yang akan diimplementasikan terakhir
 
 Nama      : Abdurrahman Luqmanul Hakim
