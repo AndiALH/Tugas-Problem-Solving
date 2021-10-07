@@ -6,6 +6,7 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Unity Editor yang digunakan dalam pengerjaan adalah versi 2020.3.19f1
 - Setiap solusi problem akan dipisahkan dengan menaruhnya di scene masing-masing
 - Asumsi untuk setiap branch tidak perlu di dilakukan build untuk setiap problem yang penting hanya file projectnya saja
+- Branch master ini digunakan untuk problem 10 sesuai dengan perintah tugas
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
 Nama      : Abdurrahman Luqmanul Hakim
