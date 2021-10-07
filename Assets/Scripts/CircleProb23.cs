@@ -18,7 +18,8 @@ public class CircleProb23 : MonoBehaviour
 
     private void PushBall()
     {
-        Vector2 force = new Vector2(100, 100);
+        //untuk problem 3 force sedikit diubah agar bola tidak memantul ke pojok kotak terus menerus
+        Vector2 force = new Vector2(100, 70);
         rigidBody2D.AddForce(force);
         Debug.Log("ball pushed");
     }
