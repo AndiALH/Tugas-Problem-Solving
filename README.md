@@ -9,8 +9,9 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Agar proses simpel, saya akan mengerjakan problem secara berurutan dari 1-10, dan pada setiap branch problem yang sebelumnya telah dikerjakan dari awal sampai problem dari branch tersebut, jadi akan ada scene dari problem sebelumnya pada setiap branch.
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
-### Notes untuk Problem 3
-- Tidak ada
+### Notes untuk Problem 4
+- Input movement menggunakan tombol W,A,S,D
+- Asumsi movement dituliskan di comment dalam script Circle.cs, pada fungsi KeyBoardControl()
 
 Nama      : Abdurrahman Luqmanul Hakim
 
