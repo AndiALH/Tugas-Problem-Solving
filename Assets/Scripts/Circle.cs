@@ -5,9 +5,28 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     // Notes: script ini akan digunakan pada circle untuk problem 4 dan seterusnya, menggantikan script CircleProb23.cs pada problem 2 dan 3
-    // Script versi problem 4
+    // Script versi problem 5
     // addition:
-    // - Fungsi KeyboardControl() untuk menggerakkan circle dengan tombol w,a,s,d
+    // - Fungsi MouseControl() untuk menggerakan circle dengan mengikuti letak mouse pada layar
+    // - Membuat object Circle singleton agar dapat mudah diakses secara global. Selain itu objek circle direncanakan tidak akan ada lebih dari satu jadi tidak ada masalah
+    // - Toggle button untuk memilih control apa yang dipilih, keyboard atau mouse
+    // - Mengganti letak pemanggilan fungsi control ke fungsi FixedUpdate dari fungsi Update
+    // - Fungsi ChangeControlInput untuk mengganti input keyboard atau mouse
+
+    //Untuk menjadikan object singleton
+    private static Circle _instance = null;
+    public static Circle Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Circle>();
+            }
+
+            return _instance;
+        }
+    }
 
     // Tombol untuk control movement circle menggunakan keyboard
     private KeyCode upButton = KeyCode.W;
@@ -21,28 +40,41 @@ public class Circle : MonoBehaviour
     // Kecepatan gerak
     public float speed = 5.0f;
 
+    // Value untuk menentukan kontrol apa yang sedang dipakai
+    private bool keyboard_toggle;
+    private bool mouse_toggle;
+
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody2D = GetComponent<Rigidbody2D>();   
+        rigidBody2D = GetComponent<Rigidbody2D>();
+
+        // Default control yang dipakai adalah keyboard, di set dari problem 5 agar saat semua problem digabungkan tidak perlu diatur-atur lagi
+        keyboard_toggle = true;
+        mouse_toggle = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        KeyboardControl();
+        if (keyboard_toggle)
+            KeyboardControl();
+
+        //mouse_toggle = true;
+        if (mouse_toggle)
+            MouseControl();
     }
 
     private void KeyboardControl()
     {
         // Fungsi untuk menggerakan circle dengan tombol w,a,s,d.
-        // Asumsi sifat movement:
-        // - bola bergerak dengan kecepatan konstan dari awal tombol dipencet sampai dilepas
+        // Notes sifat movement:
+        // - circle bergerak dengan kecepatan konstan dari awal tombol dipencet sampai dilepas
         // - jika tidak ada tombol yang dipencet, maka bola akan langsung berhenti dan diam ditempat
         // - hanya bisa bergerak secara full horizontal (kiri kanan) atau full vertikal (atas bawah). Dengan kata lain, circle tidak bisa bergerak secara diagonal (miring)
         // - jika tombol sedang dipencet, tombol lain dengan arah berlawan tidak bisa dipencet (ex. jika tombol kiri dipencet, tombol kanan tidak berfungsi)
 
-        // Untuk mendapatkan kecepatan circle.
+        // Untuk mendapatkan kecepatan circle
         Vector2 velocity = rigidBody2D.velocity;
 
         // Jika tombol w ditekan, circle bergerak keatas
@@ -84,6 +116,58 @@ public class Circle : MonoBehaviour
         rigidBody2D.velocity = velocity;
     }
 
+    private void MouseControl()
+    {
+        // Fungsi untuk menggerakan circle dengan posisi mouse pada screen game.
+        // Notes sifat movement:
+        // - asumsi circle selalu bergerak mengikuti posisi mouse di layar, bukan hanya saat layar di klik
+        // - circle bergerak dengan kecepatan berubah sesuai dengan jarak circle dengan mouse, namun dibatasi dengan kecepatan maksimal yang dapat dicapai
+        // - sengaja tidak menggunakan metode Lerp atau MoveTowards, agar sifat circle yang memantul pada dinding tetap ada dan berfungsi
+
+        // Untuk mendapatkan posisi mouse
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Untuk mendapatkan kecepatan x dan y berdasarkan selisih posisi mouse dan posisi object. Dikali
+        float mouse_x = (mousePos.x - transform.position.x) * 3;
+        float mouse_y = (mousePos.y - transform.position.y) * 3;
+
+        // Untuk mendapatkan kecepatan circle
+        Vector2 velocity = rigidBody2D.velocity;
+
+        // Mengubah kecepatan x dan y circle dengan nilai yang didapatkan sebelumnya, namun dengan batas maksimum.
+        velocity.x = GetMaxSpeed(mouse_x);
+        velocity.y = GetMaxSpeed(mouse_y);
+        rigidBody2D.velocity = velocity;
+    }
+
+    private float GetMaxSpeed(float mouse_speed)
+    {
+        // Fungsi yang akan mengembalikan kecepatan maksimal dengan batas speed yang telah ditentukan.
+
+        //Jika speed positif, maka akan dikembalikan kecepatan minimum dengan batas positif
+        if (mouse_speed >= 0)
+        {
+            return Mathf.Min(mouse_speed, speed);
+        }
+        //Jika speed negatif, maka akan dikembalikan kecepatan maksimum (karena dalam negatif jadi terbalik) dengan batas negatif
+        else
+        {
+            return Mathf.Max(mouse_speed, -speed);
+        }
+    }
+
+    public string ChangeControlInput()
+    {
+        // Metode untuk mengganti input controller dari keyboard ke mouse atau sebaliknya
+        keyboard_toggle = !keyboard_toggle;
+        mouse_toggle = !mouse_toggle;
+
+        // String untuk digunakan pada text di tombol
+        return (keyboard_toggle ? "Keyboard" : "Mouse");
+    }
+
     // referensi:
     // - code dari tugas 1 membuat game Pong
+    // - https://gamedevbeginner.com/make-an-object-follow-the-mouse-in-unity-in-2d/#mouse_position_world_2D
+    // - code dari tugas 8 membuat incremental game
 }
