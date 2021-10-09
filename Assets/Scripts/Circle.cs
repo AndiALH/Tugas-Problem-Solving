@@ -36,9 +36,9 @@ public class Circle : MonoBehaviour
     // Kecepatan gerak
     public float speed = 5.0f;
 
-    // Value untuk menentukan kontrol apa yang sedang dipakai
-    private bool keyboard_toggle;
-    private bool mouse_toggle;
+    // Value untuk menentukan kontrol apa yang sedang dipakai. Default yang dipakai adalah keyboard
+    private bool keyboard_toggle = true;
+    private bool mouse_toggle = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +46,8 @@ public class Circle : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
 
         // Default control yang dipakai adalah keyboard, di set dari problem 5 agar saat semua problem digabungkan tidak perlu diatur-atur lagi
-        keyboard_toggle = true;
-        mouse_toggle = false;
+        // keyboard_toggle = true;
+        // mouse_toggle = false;
     }
 
     // Update is called once per frame
@@ -159,6 +159,7 @@ public class Circle : MonoBehaviour
         mouse_toggle = !mouse_toggle;
 
         // String untuk digunakan pada text di tombol
+        Debug.Log("Control Changed");
         return (keyboard_toggle ? "Keyboard" : "Mouse");
     }
 

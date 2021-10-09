@@ -5,13 +5,10 @@ using UnityEngine;
 public class ObstacleManager : MonoBehaviour
 {
     // Manager obstacle yang bertugas melakukan spawn obstacle
-    // Script versi problem 8
+    // Script versi problem 9
     // addition:
-    // - Menambahkan bool apakah object yang di destroy akan di spawn kembali untuk pengimplementasian spawn ulang object agar problem sebelumnya tidak terpengaruh
-    // - Menambah variabel jumlah obstacle yang ingin di spawn dengan default 0. Jika tidak diubah, maka jumlah obstacle yang di spawn akan tetap random dari 3-10
-    // - Menambahkan variabel waktu spawn kembali obstacle yang telah di destroy. Nilai default 3
-    // - Menambahkan kondisi di update yang mengecek apakah ada obstacle yang telah di destroy. Jika ada, maka akan dipanggil fungsi untuk spawn kembali obstacle
-    // - Menambahkan fungsi coroutine SpawnDestroyedObstacle(GameObject, int) yang akan spawn obstacle kembali dengan posisi random dengan delay waktu yang ditentukan
+    // - Ditambahkan parameter string pada metode HitObstacle untuk mendapatkan siapa yang mendapatkan object. Akan digunakan untuk sistem scoring
+    // - Pada metode DestroyObstacle, akan dipanggil fungsi yang akan me reset target enemy
 
     // Menyimpan batas-batas area game
     [SerializeField] private Transform leftBorder;
@@ -38,6 +35,9 @@ public class ObstacleManager : MonoBehaviour
 
     // Menyimpan apakah obstacle yang telah di destroy akan di spawn kembali kemudian. Akan dipakai seperti variabel destroyableObstacle
     [SerializeField] private bool spawnDestroyed = false;
+
+    // List untuk active object
+    public List<GameObject> spawnedObstacle { get; private set; }
 
     // List untuk destroyed object
     private List<GameObject> destroyedObstacle;
@@ -67,6 +67,7 @@ public class ObstacleManager : MonoBehaviour
     {
         // Init list untuk destroyed obstacle nanti
         destroyedObstacle = new List<GameObject>();
+        spawnedObstacle = new List<GameObject>();
 
         // Mendapatkan batas area spawn
         min_x = leftBorder.position.x + area_padding;
@@ -114,6 +115,7 @@ public class ObstacleManager : MonoBehaviour
 
         // Memanggil metode untuk membuat obstacle dan menyimpan obstacle di variabel
         GameObject obstacle = Factory.CreateRandomObject(spawn_pos);
+        spawnedObstacle.Add(obstacle);
     }
 
     private Vector3 GetRandomCoordinate()
@@ -139,7 +141,7 @@ public class ObstacleManager : MonoBehaviour
         return (colliders.Length > 0);
     }
 
-    public void HitObstacle(GameObject obstacle)
+    public void HitObstacle(GameObject obstacle, string scorer="Player")
     {
         // Fungsi untuk memanggil fungsi menghancurkan obstacle dan menambahkan score, akan dipanggil saat kondisi circle collide dengan obstacle dll.
 
@@ -148,7 +150,7 @@ public class ObstacleManager : MonoBehaviour
             return;
 
         DestroyObstacle(obstacle);
-        GameManager.Instance.IncreaseScore();
+        GameManager.Instance.IncreaseScore(scorer);
     }
 
     private void DestroyObstacle(GameObject obstacle)
@@ -156,8 +158,18 @@ public class ObstacleManager : MonoBehaviour
         // Fungsi untuk menghancurkan object. Namun sebenarnya object hanya di nonaktifkan
 
         obstacle.SetActive(false);
+
+        // Remove object dari list spawned obstacle
+        spawnedObstacle.Remove(obstacle);
+
         // Setelah object dinonaktifkan, dimasukkan ke dalam list yang menyimpan destroyed object 
         destroyedObstacle.Add(obstacle);
+
+        // Untuk me-reset target enemy setiap ada obstacle yang hilang
+        if (EnemyCircle.Instance != null)
+        {
+            EnemyCircle.Instance.ResetTarget();
+        }
     }
 
     private IEnumerator SpawnDestroyedObstacle(GameObject obstacle, int time)
@@ -183,8 +195,15 @@ public class ObstacleManager : MonoBehaviour
 
         // Mengganti posisi objek menjadi posisi baru, lalu objek kembali diaktifkan
         obstacle.transform.position = spawn_pos;
+        spawnedObstacle.Add(obstacle);
         obstacle.SetActive(true);
         //Debug.Log("Object spawned back after " + time + " seconds");
+
+        // Untuk me-reset target enemy setiap ada obstacle yang kembali muncul
+        if (EnemyCircle.Instance != null)
+        {
+            EnemyCircle.Instance.ResetTarget();
+        }
     }
 
     // referensi:

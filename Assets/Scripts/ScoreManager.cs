@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Score Manager yang bertugas menampilkan score
+    // Script versi problem 9
+    // addition:
+    // - Ditambahkan update untuk score enemy
 
     [SerializeField] Text scoreValue;
+    [SerializeField] Text enemyScoreValue;
 
     // Start is called before the first frame update
     //void Start(){}
@@ -18,5 +21,12 @@ public class ScoreManager : MonoBehaviour
         // Akan selalu mengupdate score dengan mengecek dari Game Manager
         int currentScore = GameManager.Instance.GetScore();
         scoreValue.text = "" + currentScore;
+
+        if (enemyScoreValue != null)
+        {
+            int enemyScore = GameManager.Instance.GetEnemyScore();
+            enemyScoreValue.text = "" + enemyScore;
+        }
+        
     }
 }
