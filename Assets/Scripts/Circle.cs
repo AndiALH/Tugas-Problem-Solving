@@ -5,13 +5,9 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     // Notes: script ini akan digunakan pada circle untuk problem 4 dan seterusnya, menggantikan script CircleProb23.cs pada problem 2 dan 3
-    // Script versi problem 5
+    // Script versi problem 7
     // addition:
-    // - Fungsi MouseControl() untuk menggerakan circle dengan mengikuti letak mouse pada layar
-    // - Membuat object Circle singleton agar dapat mudah diakses secara global. Selain itu objek circle direncanakan tidak akan ada lebih dari satu jadi tidak ada masalah
-    // - Toggle button untuk memilih control apa yang dipilih, keyboard atau mouse
-    // - Mengganti letak pemanggilan fungsi control ke fungsi FixedUpdate dari fungsi Update
-    // - Fungsi ChangeControlInput untuk mengganti input keyboard atau mouse
+    // - Menambahkan fungsi OnTriggerEnter2D yang akan mendeteksi ketika circle collide dengan obstacle
 
     //Untuk menjadikan object singleton
     private static Circle _instance = null;
@@ -164,6 +160,19 @@ public class Circle : MonoBehaviour
 
         // String untuk digunakan pada text di tombol
         return (keyboard_toggle ? "Keyboard" : "Mouse");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Metode untuk mendeteksi jika collide dengan trigger dari obstacle. Jika collide, maka akan memanggil fungsi yang akan menghilangkan obstacle dan menambahkan skor
+
+        if (collision.tag == "Obstacle")
+        {
+            //Debug.Log("Collide with obstacle");
+
+            // Akan memanggil metode pada obstacle manager yang akan melakukan proses lebih lanjut
+            ObstacleManager.Instance.HitObstacle(collision.gameObject);
+        }
     }
 
     // referensi:

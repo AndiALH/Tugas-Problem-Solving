@@ -3,10 +3,9 @@ using UnityEngine;
 public class ObstacleFactory : MonoBehaviour, IFactory
 {
     // Class factory untuk membuat obstacle
-    // Script versi problem 6
+    // Script versi problem 7
     // addition:
-    // - metode CreateObject(int, Vector3) untuk spawn obstacle dengan tag dan koordinat tertentu
-    // - metode CreateRandomObject(Vector3) untuk spawn obstacle secara random dengan koordinat tertentu
+    // - memperbaiki index random yang diambil untuk tag object, karena sebelumnya ada satu prefabs yang tidak akan terambil sebagai obstacle yang di respawn
 
     //Array dari semua prefab obstacle
     [SerializeField] private GameObject[] obstaclePrefabs;
@@ -30,7 +29,7 @@ public class ObstacleFactory : MonoBehaviour, IFactory
         // Fungsi untuk membuat obstacle secara random
 
         // Untuk mengambil obstacle random yang ada pada array prefab
-        int index = Random.Range(0, 3);
+        int index = Random.Range(0, obstaclePrefabs.Length);
         GameObject obstacle = CreateObject(index, spawn_pos);
         return obstacle;
     }
