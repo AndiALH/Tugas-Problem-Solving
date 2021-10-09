@@ -9,9 +9,8 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Agar proses simpel, saya akan mengerjakan problem secara berurutan dari 1-10, dan pada setiap branch problem yang sebelumnya telah dikerjakan dari awal sampai problem dari branch tersebut, jadi akan ada scene dari problem sebelumnya pada setiap branch.
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
-### Notes untuk Problem 7
-- Saat circle mengenai obstacle (kotak) kotak akan hilang dengan cara di nonaktifkan, dan score player akan bertambah
-- Obstacle yang dihancurkan dimasukkan ke dalam list untuk keperluan problem selanjutnya
+### Notes untuk Problem 8
+- Karena perintah munculkan lagi kotak yang sudah tertabrak, maka diasumsikan bahwa object kotak yang kembali dimunculkan adalah object yang sama dari yang hilang. Maka dari itu object di destroy dengan cara dinonaktifkan bukan di destroy object, dan saat di spawn kembali object kembali diaktifkan dengan posisi yang diubah secara random
 
 Nama      : Abdurrahman Luqmanul Hakim
 
