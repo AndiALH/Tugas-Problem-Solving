@@ -9,10 +9,9 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Agar proses simpel, saya akan mengerjakan problem secara berurutan dari 1-10, dan pada setiap branch problem yang sebelumnya telah dikerjakan dari awal sampai problem dari branch tersebut, jadi akan ada scene dari problem sebelumnya pada setiap branch.
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
-### Notes untuk Problem 6
-- Object di spawn random baik secara posisi spawn, jumlah object yang di spawn (range 3 - 10), dan variasi bentuk object (ada 4 bentuk)
-- Pengimplementasian menggunakan factory pattern
-- Object sudah dibuat agar waktu di spawn tidak collide dengan object lain ataupun dengan circle, agar untuk implementasi problem selanjutnya sekalian lebih mudah
+### Notes untuk Problem 7
+- Saat circle mengenai obstacle (kotak) kotak akan hilang dengan cara di nonaktifkan, dan score player akan bertambah
+- Obstacle yang dihancurkan dimasukkan ke dalam list untuk keperluan problem selanjutnya
 
 Nama      : Abdurrahman Luqmanul Hakim
 
