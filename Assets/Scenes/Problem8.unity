@@ -497,6 +497,7 @@ MonoBehaviour:
   topBorder: {fileID: 1884014593}
   bottomBorder: {fileID: 1181076008}
   obstacleCount: 0
+  spawnBackTime: 3
   destroyableObstacle: 1
   spawnDestroyed: 1
   obstacleFactory: {fileID: 2008244538}
@@ -589,6 +590,7 @@ GameObject:
   - component: {fileID: 1095071888}
   - component: {fileID: 1095071887}
   - component: {fileID: 1095071886}
+  - component: {fileID: 1095071889}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -698,6 +700,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095071884}
   m_CullTransparentMesh: 1
+--- !u!114 &1095071889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095071884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0db00b55c184047b24642979724117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backToMenuButton: {fileID: 1095071886}
 --- !u!4 &1181076008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9144244384135426981, guid: 6f35085921be6ac45a08ca252aa1608d, type: 3}
@@ -732,6 +747,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e6356a4e0ce414c828d5454559bc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  obstacleManager: {fileID: 0}
+  startPanel: {fileID: 0}
+  endPanel: {fileID: 0}
+  timeLimit: 0
+  startTime: 0
+  controlButton: {fileID: 0}
 --- !u!4 &1186776414
 Transform:
   m_ObjectHideFlags: 0
@@ -1659,6 +1682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreValue: {fileID: 1857723147}
+  enemyScoreValue: {fileID: 0}
 --- !u!114 &2014214215
 MonoBehaviour:
   m_ObjectHideFlags: 0
