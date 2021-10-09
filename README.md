@@ -10,9 +10,10 @@ Tugas Chapter 10 dari studi independen Agate Academy bidang game programming. Ha
 - Untuk notes/asumsi spesifik per build/problem akan dituliskan pada readme di branch build tersebut
 
 ### Notes untuk Problem 6
-- Object di spawn random baik secara posisi spawn, jumlah object yang di spawn (range 3 - 10), dan variasi bentuk object (ralat ada 3 bentuk, harusnya ada 4 namun untuk versi branch ini hanya akan ada 3 bentuk karena kesalahan teknis. Untuk branch problem selanjutnya akan ada 4 bentuk)
+- Object di spawn random baik secara posisi spawn, jumlah object yang di spawn (range 3 - 10), dan variasi bentuk object (4 bentuk)
 - Pengimplementasian menggunakan factory pattern
 - Object sudah dibuat agar waktu di spawn tidak collide dengan object lain ataupun dengan circle, agar untuk implementasi problem selanjutnya sekalian lebih mudah
+- *Ralat harusnya jumlah object yang dispawn dari range 3-9 dan bentuk object ada 3 karena ada kesalahan teknis. Untuk di build akhir nanti baru jumlah object yang di spawn dari range 3-10, dan variasi bentuk object ada 4
 
 Nama      : Abdurrahman Luqmanul Hakim
 
